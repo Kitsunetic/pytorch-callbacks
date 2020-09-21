@@ -92,8 +92,8 @@ class LRDecaying:
         self.decay_rate = decay_rate
         self.verbose = verbose
 
-        self.lr_encoder = next(self.optim_encoder.param_groups)['lr']
-        self.lr_decoder = next(self.optim_decoder.param_groups)['lr']
+        self.lr_encoder = next(iter(self.optim_encoder.param_groups.values()))['lr']
+        self.lr_decoder = next(iter(self.optim_decoder.param_groups.values()))['lr']
 
     def __call__(self, history):
         if len(history['valid']['loss']) > self.patience + 1:
